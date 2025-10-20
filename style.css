@@ -28,8 +28,6 @@ body {
 .logo span:nth-child(6){color:#EA4335;}
 .logo span:nth-child(7){color:#FBBC05;}
 .logo span:nth-child(8){color:#34A853;}
-.logo span:nth-child(9){color:#4285F4;}
-.logo span:nth-child(10){color:#EA4335;}
 
 .search-container {
   position: relative;
@@ -41,13 +39,13 @@ body {
   background: white;
   transition: box-shadow 0.2s ease;
   z-index: 1;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .search-container:focus-within { box-shadow: 0 1px 6px rgba(32,33,36,0.28); }
 
 #search-input {
-  flex: 1 1 auto;
+  flex: 1;
   height: 44px;
   border: none;
   outline: none;
@@ -57,8 +55,18 @@ body {
 }
 
 .search-icon { color: #9aa0a6; font-size: 20px; margin-right: 8px; }
-.icons-right { display: flex; gap: 10px; align-items: center; }
-.material-icons { cursor: pointer; color: #5f6368; }
+
+.icons-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.material-icons {
+  cursor: pointer;
+  color: #5f6368;
+  font-size: 24px;
+}
 
 #history-list {
   list-style: none;
@@ -87,13 +95,19 @@ body {
   color: #1967d2;
   border: none;
   border-radius: 20px;
-  padding: 8px 16px;
-  font-size: 14px;
+  padding: 6px 10px;
+  font-size: 12px;
   cursor: pointer;
-  margin-left: 8px;
 }
 
-.buttons { margin-top: 30px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .buttons button {
   padding: 10px 20px;
   border: none;
@@ -153,5 +167,18 @@ body {
 @media (max-width:600px){
   .keyboard { grid-template-columns: repeat(10, 1fr); }
   .keyboard button { font-size:14px; padding:10px 0; }
-  .mode-btn { order:1; flex:1 0 auto; margin-left:0; margin-top:4px; }
+  .mode-btn { font-size: 11px; padding: 5px 8px; }
+}
+
+@keyframes wave {
+  0% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(-5deg); }
+  50% { transform: translateY(0px) rotate(0deg); }
+  75% { transform: translateY(5px) rotate(5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.logo span.animate {
+  display: inline-block;
+  animation: wave 0.6s ease-in-out;
 }
