@@ -19,7 +19,7 @@
 <body>
 
 <div class="container">
-  <h1 class="logo">
+  <h1 class="logo" id="animated-logo">
     <span>G</span><span>o</span><span>E</span><span>d</span><span>c</span><span>e</span><span>l</span><span>l</span>
   </h1>
 
@@ -27,10 +27,10 @@
     <span class="material-icons search-icon">search</span>
     <input type="text" id="search-input" placeholder="" autocomplete="off">
     <div class="icons-right">
+      <button id="mode-ia" class="mode-btn">Modo IA</button>
       <span class="material-icons mic-btn">mic</span>
       <span class="material-icons lens-btn">photo_camera</span>
     </div>
-    <button id="mode-ia" class="mode-btn">Modo IA</button>
     <ul id="history-list"></ul>
   </div>
 
@@ -43,8 +43,6 @@
 <button id="open-keyboard" class="floating-keyboard-btn material-icons">keyboard</button>
 <div id="virtual-keyboard" class="keyboard hidden"></div>
 
-<!-- JS externo -->
 <script src="script.js"></script>
-
 </body>
 </html>
