@@ -48,7 +48,6 @@ document.querySelector('.lens-btn').addEventListener('click', async ()=>{
   const choice = confirm("Clique em OK para usar a câmera ou Cancelar para enviar uma imagem do dispositivo.");
 
   if(choice){
-
     try{
       const stream = await navigator.mediaDevices.getUserMedia({video:true});
       const video = document.createElement('video');
@@ -75,8 +74,10 @@ document.querySelector('.lens-btn').addEventListener('click', async ()=>{
         const canvas = document.createElement('canvas');
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
-        canvas.getContext('2d').drawImage(video,0,0);
-        const imageURL = canvas.toDataURL('image/png');
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video,0,0);
+        // Reduzindo qualidade e bits por pixel
+        const imageURL = canvas.toDataURL('image/jpeg', 0.5);
         window.open(`https://www.google.com/searchbyimage?image_url=${encodeURIComponent(imageURL)}`, '_blank');
 
         stream.getTracks().forEach(track => track.stop());
@@ -87,14 +88,11 @@ document.querySelector('.lens-btn').addEventListener('click', async ()=>{
     } catch {
       alert('Câmera não disponível.');
     }
-
   } else {
-
     const inputFile = document.createElement('input');
     inputFile.type = 'file';
     inputFile.accept = 'image/*';
     inputFile.click();
-
     inputFile.onchange = () => {
       const file = inputFile.files[0];
       if(!file) return;
@@ -104,9 +102,22 @@ document.querySelector('.lens-btn').addEventListener('click', async ()=>{
   }
 });
 
+modeIaBtn.addEventListener('click', ()=>{
+  window.location.href="https://gemini.google.com/app?hl=pt-BR";
+});
 
-modeIaBtn.addEventListener('click', ()=>{ window.location.href="https://gemini.google.com/app?hl=pt-BR"; });
+function animateLogo(){
+  const letters = document.querySelectorAll('.logo span');
+  letters.forEach((letter, index)=>{
+    setTimeout(()=>{
+      letter.classList.add('animate');
+      setTimeout(()=>letter.classList.remove('animate'), 600);
+    }, index * 100);
+  });
+}
 
+animateLogo();
+setInterval(animateLogo, 5 * 60 * 1000); // a cada 5 minutos
 
 const rows=[
   ['`','1','2','3','4','5','6','7','8','9','0','-','=','←'],
@@ -139,7 +150,9 @@ keyboardContainer.addEventListener('click', e=>{
   else input.value+=k;
 });
 
-keyboardBtn.addEventListener('click', ()=>{ keyboardContainer.classList.toggle('hidden'); });
+keyboardBtn.addEventListener('click', ()=>{
+  keyboardContainer.classList.toggle('hidden');
+});
 
 let dragging=false, offsetX, offsetY;
 keyboardContainer.addEventListener('mousedown', e=>{
